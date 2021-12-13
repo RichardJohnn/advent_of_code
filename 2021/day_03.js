@@ -1030,55 +1030,11 @@ const totals = _.reduce(inputs, (sums, n) =>
   //508, 514, 490, 521
 //]
 
-//console.log(totals.map(n => n > magic ? 1 : 0));
-//const gamma = parseInt(totals.map(n => n > magic ? 1 : 0).join(''), 2)
-//console.log("gamma", gamma);
-//const epsilon = parseInt(totals.map(n => n > magic ? 0 : 1).join(''), 2)
-//console.log("epsilon", epsilon);
+console.log(totals.map(n => n > magic ? 1 : 0));
+const gamma = parseInt(totals.map(n => n > magic ? 1 : 0).join(''), 2)
+console.log("gamma", gamma);
+const epsilon = parseInt(totals.map(n => n > magic ? 0 : 1).join(''), 2)
+console.log("epsilon", epsilon);
 
-//console.log(gamma * epsilon);
+console.log(gamma * epsilon);
 
-const list = _.clone(inputs)
-
-const tester = (above, n, threshold) => above ? n >= threshold : n < threshold;
-
-const searchBit = (testType, numbers, i) => {
-  console.log("----------------------------");
-  console.log(numbers, i);
-
-  const total = _.reduce(numbers, (sum, n) => 
-    sum += makeNumbers(n)[i]
-  , 0);
-  console.log("total", total);
-
-  const threshold = numbers.length / 2;
-  console.log("threshold", threshold);
-  const flipper = (b) => Number(testType ? b : !b);
-  const testering = tester(testType, total, threshold)
-  console.log("testering", testering);
-  const testThangs = Number((testering));
-  console.log("testThangs", testThangs);
-
-  const filtered = numbers.filter(binaryNumber => 
-    binaryNumber[i] == testThangs)
-  //console.log("filtered", filtered);
-
-  if (filtered.length < 2) {
-    console.log('only one thing left');
-    return filtered[0];
-  }
-  return searchBit(testType, filtered, i + 1);
-}
-
-const partial = require("lodash/partial");
-const oxygen = searchBit(true, list, 0)
-console.log("oxygen", oxygen);
-const co2scrubber = searchBit(false, list, 0)
-console.log("co2scrubber", co2scrubber);
-
-const o2 = parseInt(oxygen, 2)
-console.log("o2", o2);
-const co2 = parseInt(co2scrubber, 2)
-console.log("co2", co2);
-
-console.log(o2 * co2);
